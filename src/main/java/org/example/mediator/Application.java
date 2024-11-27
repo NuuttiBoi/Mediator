@@ -1,22 +1,20 @@
 package org.example.mediator;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class HelloApplication extends Application {
+public class Application extends javafx.application.Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ChatMediator mediator = new ChatMediator();
-        createChatClient("Ismo", mediator, "IsmoController");
-        createChatClient("Matti", mediator, "MattiController");
-        createChatClient("Seppo", mediator, "SeppoController");
+        createChatClient("Ismo", mediator, "IsmoController",0);
+        createChatClient("Matti", mediator, "MattiController",500);
+        createChatClient("Seppo", mediator, "SeppoController",1000);
     }
 
-    private void createChatClient(String username, ChatMediator mediator, String controllerClassName) throws Exception {
+    private void createChatClient(String username, ChatMediator mediator, String controllerClassName,
+                                  int x_position) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("chat-view.fxml"));
         String fullyQualifiedClassName = "org.example.mediator." + controllerClassName;
         Class<?> controllerClass = Class.forName(fullyQualifiedClassName);
@@ -29,6 +27,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(loader.load());
         scene.getStylesheets().add(getClass().getResource("/org/example/mediator/style.css").toExternalForm());
         stage.setScene(scene);
+        stage.setX(x_position);
         stage.show();
     }
 

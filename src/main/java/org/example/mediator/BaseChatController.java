@@ -7,7 +7,7 @@ public abstract class BaseChatController {
     protected Mediator mediator;
 
     public BaseChatController(String username, Mediator mediator) {
-        this.username = username;
+        this.username = username.toLowerCase();
         this.mediator = mediator;
         mediator.registerController(this);
     }
